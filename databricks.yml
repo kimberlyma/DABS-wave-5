@@ -49,13 +49,11 @@ targets:
     mode: production
     workspace:
       host: https://e2-demo-field-eng.cloud.databricks.com
-      # We always use /Users/kimberly.mahoney@databricks.com for all resources to make sure we only have a single copy.
       # If this path results in an error, please make sure you have a recent version of the CLI installed.
-      root_path: /Users/kimberly.mahoney@databricks.com/.bundle/${bundle.name}/${bundle.target}
     variables:
       warehouse_id: 
         lookup:
-          warehouse: prod-dnbtraining-warehouse
+          warehouse: dbdemos-shared-endpoint
       catalog: dnb_wave_5
       schema: prod
       service_principal_id: c6895172-0f52-400a-99dc-390e867f5f8b

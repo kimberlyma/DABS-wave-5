@@ -38,11 +38,13 @@ resources:
           compute_key: Default
           depends_on:
             - task_key: ingest
+          run_if: ALL_SUCCESS
           notebook_task:
             notebook_path: ../notebooks/weather_coffee_refined.ipynb
         - task_key: top_ten_rainfall_refresh
           depends_on:
             - task_key: coffee_weather_refined
+          run_if: ALL_SUCCESS
           sql_task:
             warehouse_id: ${var.warehouse_id}
             file:
