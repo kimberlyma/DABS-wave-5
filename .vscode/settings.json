@@ -9,5 +9,10 @@
             "file:///Users/kimberly.mahoney/Documents/dnb-training/coffee-weather/resources/coffee_weather.yml",
             "file:///Users/kimberly.mahoney/Documents/dnb-training/coffee-weather/databricks.yml"
         ]
-    }
+    },
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

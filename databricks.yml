@@ -14,8 +14,6 @@ variables:
     description: The catalog to use
   schema:
     description: The schema to use
-  service_principal_id:
-    description: Service principal for production
 
 targets:
   # The 'dev' target, for development purposes. This target is the default.
