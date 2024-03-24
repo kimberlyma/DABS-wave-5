@@ -2,5 +2,12 @@
     "python.envFile": "${workspaceFolder}/.databricks/.databricks.env",
     "databricks.python.envFile": "${workspaceFolder}/.env",
     "jupyter.interactiveWindow.cellMarker.codeRegex": "^# COMMAND ----------|^# Databricks notebook source|^(#\\s*%%|#\\s*\\<codecell\\>|#\\s*In\\[\\d*?\\]|#\\s*In\\[ \\])",
-    "jupyter.interactiveWindow.cellMarker.default": "# COMMAND ----------"
+    "jupyter.interactiveWindow.cellMarker.default": "# COMMAND ----------",
+    "yaml.schemas": {
+        "./schemas/bundle_config_schema.json": "bundle*.yml",
+        "https://json.schemastore.org/databricks-asset-bundles.json": [
+            "file:///Users/kimberly.mahoney/Documents/dnb-training/coffee-weather/resources/coffee_weather.yml",
+            "file:///Users/kimberly.mahoney/Documents/dnb-training/coffee-weather/databricks.yml"
+        ]
+    }
 }

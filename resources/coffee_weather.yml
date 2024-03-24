@@ -6,9 +6,18 @@ resources:
         - compute_key: Default
           spec:
             kind: SERVERLESS_PREVIEW
+    
+    # Parameters used across tasks in a single MTJ
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: schema
+          default: ${var.schema}
+        - name: bundle_target
+          default: ${bundle.target}
+
       tasks:
         - task_key: ingest
-          email_notifications: {}
           notebook_task:
             notebook_path: ../notebooks/my_notebook.ipynb
             source: WORKSPACE
@@ -25,6 +34,17 @@ resources:
             - pypi:
                 package: geopy==2.4.1
           webhook_notifications: {}
+        - task_key: coffee_weather_refined
+          compute_key: Default
+          depends_on:
+            - task_key: ingest
+          notebook_task:
+            notebook_path: ../notebooks/weather_coffee_refined.ipynb
+        - task_key: top_ten_rainfall_refresh
+          depends_on:
+            - task_key: coffee_weather_refined
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../queries/top_10_rainfall.sql
       max_concurrent_runs: 1
-      email_notifications: {}
-      webhook_notifications: {}
