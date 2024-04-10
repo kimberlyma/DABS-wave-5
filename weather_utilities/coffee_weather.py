@@ -7,7 +7,7 @@ from retry_requests import retry
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
 
-# the RateLimiter is very finicky
+# the RateLimiter is very sad and finicky
 def find_region_latlong(region_list):
 	geolocator = Nominatim(user_agent='myapplication')
 	geocodes = []
