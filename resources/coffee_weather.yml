@@ -1,52 +1,45 @@
 resources:
   jobs:
-    coffee_weather:
-      name: Coffee Weather
-      compute:
-        - compute_key: Default
-          spec:
-            kind: SERVERLESS_PREVIEW
-    
-    # Parameters used across tasks in a single MTJ
-      parameters:
-        - name: catalog
-          default: ${var.catalog}
-        - name: schema
-          default: ${var.schema}
-        - name: bundle_target
-          default: ${bundle.target}
-
+    dev_kimberly_mahoney_Coffee_Weather:
+      name: "Coffee Weather"
       tasks:
         - task_key: ingest
           notebook_task:
-            notebook_path: ../notebooks/my_notebook.ipynb
+            notebook_path: /Users/kimberly.mahoney@databricks.com/.bundle/coffee_weather/dev/files/notebooks/my_notebook
             source: WORKSPACE
-          compute_key: Default
-          run_if: ALL_SUCCESS
-          notification_settings: {}
-          libraries:
-            - pypi:
-                package: openmeteo-requests==1.2.0
-            - pypi:
-                package: requests-cache==1.2.0
-            - pypi:
-                package: retry-requests==2.0.0
-            - pypi:
-                package: geopy==2.4.1
-          webhook_notifications: {}
         - task_key: coffee_weather_refined
-          compute_key: Default
           depends_on:
             - task_key: ingest
-          run_if: ALL_SUCCESS
           notebook_task:
-            notebook_path: ../notebooks/weather_coffee_refined.ipynb
+            notebook_path: /Users/kimberly.mahoney@databricks.com/.bundle/coffee_weather/dev/files/notebooks/weather_coffee_refined
+            source: WORKSPACE
         - task_key: top_ten_rainfall_refresh
           depends_on:
             - task_key: coffee_weather_refined
-          run_if: ALL_SUCCESS
           sql_task:
-            warehouse_id: ${var.warehouse_id}
             file:
-              path: ../queries/top_10_rainfall.sql
-      max_concurrent_runs: 1
+              path: /Users/kimberly.mahoney@databricks.com/.bundle/coffee_weather/dev/files/queries/top_10_rainfall.sql
+              source: WORKSPACE
+            warehouse_id: 475b94ddc7cd5211
+      environments:
+        - environment_key: Default
+          spec:
+            client: "1"
+            dependencies:
+            - openmeteo-requests==1.2.0
+            - retry-requests==2.0.0
+            - requests-cache==1.2.0
+            - geopy==2.4.1
+      tags:
+        dev: kimberly_mahoney
+      parameters:
+        - name: catalog
+          default: dnb_wave_5
+        - name: schema
+          default: sandbox
+        - name: bundle_target
+          default: dev
+      edit_mode: UI_LOCKED
+      deployment:
+        kind: BUNDLE
+        metadata_file_path: /Users/kimberly.mahoney@databricks.com/.bundle/coffee_weather/dev/state/metadata.json
