@@ -5,20 +5,20 @@ resources:
       tasks:
         - task_key: ingest
           notebook_task:
-            notebook_path: /Users/kimberly.mahoney@databricks.com/.bundle/coffee_weather/dev/files/notebooks/my_notebook
+            notebook_path: ../notebooks/ingest.ipynb
             source: WORKSPACE
         - task_key: coffee_weather_refined
           depends_on:
             - task_key: ingest
           notebook_task:
-            notebook_path: /Users/kimberly.mahoney@databricks.com/.bundle/coffee_weather/dev/files/notebooks/weather_coffee_refined
+            notebook_path: ../notebooks/weather_coffee_refined.ipynb
             source: WORKSPACE
         - task_key: top_ten_rainfall_refresh
           depends_on:
             - task_key: coffee_weather_refined
           sql_task:
             file:
-              path: /Users/kimberly.mahoney@databricks.com/.bundle/coffee_weather/dev/files/queries/top_10_rainfall.sql
+              path: ../queries/top_10_rainfall.sql
             warehouse_id: ${var.warehouse_id}
       tags:
         dev: kimberly_mahoney
@@ -29,7 +29,3 @@ resources:
           default: ${var.schema}
         - name: bundle_target
           default: dev
-      edit_mode: UI_LOCKED
-      deployment:
-        kind: BUNDLE
-        metadata_file_path: /Users/kimberly.mahoney@databricks.com/.bundle/coffee_weather/dev/state/metadata.json
