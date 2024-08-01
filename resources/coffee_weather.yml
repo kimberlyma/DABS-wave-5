@@ -19,24 +19,14 @@ resources:
           sql_task:
             file:
               path: /Users/kimberly.mahoney@databricks.com/.bundle/coffee_weather/dev/files/queries/top_10_rainfall.sql
-              source: WORKSPACE
-            warehouse_id: 475b94ddc7cd5211
-      environments:
-        - environment_key: Default
-          spec:
-            client: "1"
-            dependencies:
-            - openmeteo-requests==1.2.0
-            - retry-requests==2.0.0
-            - requests-cache==1.2.0
-            - geopy==2.4.1
+            warehouse_id: ${var.warehouse_id}
       tags:
         dev: kimberly_mahoney
       parameters:
         - name: catalog
-          default: dnb_wave_5
+          default: ${var.catalog}
         - name: schema
-          default: sandbox
+          default: ${var.schema}
         - name: bundle_target
           default: dev
       edit_mode: UI_LOCKED
