@@ -1,5 +1,6 @@
 # This is a Databricks asset bundle definition for coffee_weather.
 # See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+# default root /Users/${workspace.current_user.userName}/.bundle/${bundle.name}/my-envs/${bundle.target}
 bundle:
   name: coffee_weather
 
@@ -54,13 +55,14 @@ targets:
           warehouse: dbdemos-shared-endpoint
       catalog: dnb_wave_5
       schema: prod
-      service_principal_id: c6895172-0f52-400a-99dc-390e867f5f8b
+      # service_principal_id: 
+      #   default: c6895172-0f52-400a-99dc-390e867f5f8b
         # this will take forever in e2-demo-field-eng
         # lookup:
         #   service_principal: eb-dnb-wave-5-sp 
     run_as:
-      service_principal_name: ${var.service_principal_id}
+      service_principal_name: c6895172-0f52-400a-99dc-390e867f5f8b
     resources:
       jobs:
-        coffee_weather:
+        Coffee_Weather:
           name: "[prod ${workspace.current_user.userName}] Coffee Weather"

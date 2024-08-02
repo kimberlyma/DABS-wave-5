@@ -1,6 +1,7 @@
-resources:
+#possible resources - experiments, jobs, models, dlt pipelines
+resources:    
   jobs:
-    dev_kimberly_mahoney_Coffee_Weather:
+    Coffee_Weather:
       name: "Coffee Weather"
       tasks:
         - task_key: ingest

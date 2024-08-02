@@ -1,5 +1,6 @@
 pytest
 databricks-connect==14.3.1
+databricks-sdk==0.29.0
 openmeteo-requests
 requests-cache 
 retry-requests
