@@ -3,12 +3,11 @@ import openmeteo_requests
 import requests_cache
 import pandas as pd
 from retry_requests import retry
-
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
 
 from weather_utilities import rescue_object
-
+# create a line that is 200 characters long
 # the RateLimiter is very finicky
 def find_region_latlong(region_list):
     geolocator = Nominatim(user_agent='myapplication')
